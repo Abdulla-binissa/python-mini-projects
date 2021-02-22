@@ -4,7 +4,7 @@ def generate(passLength, reqUppercase, reqNumber, reqSpecial):
     reqs = [reqUppercase, reqNumber, reqSpecial]
     counter = 0
     password = ''
-    
+
     while(True):
         rand = random.randint(0, 3)
         counter += 1
@@ -79,4 +79,4 @@ while(True):
         else: print("\nEnter 'Y' for yes or 'N' for no.")
     if( answer.lower() == 'n' ): break
 
-print('\nThank you!')
+print('Thank you!')

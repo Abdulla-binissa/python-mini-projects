@@ -13,30 +13,34 @@ def main():
     screen = pygame.display.set_mode(size)
     screen.fill("white")
     
-    player = PlayerData.Player()
+    data = PlayerData.Data()
     notNow = time.time()
 
     while(True):
         
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
         
             elif event.type == pygame.KEYDOWN: # Arrow keys
-                player.changeDirection(event.key)
+                data.changeDirection(event.key)
 
         now = int(time.time() % 30)
         if now != notNow:
-            player.updateLocation()
+            data.updatePlayerLocation()
+            
             notNow = int(time.time() % 30)
 
-        drawState(screen, player)
+        drawState(screen, data)
         pygame.display.flip()
 
+def addFood():
+    # If there is no food
+    
+    return "hello"
+    #add food randomly somehwere 
 
-
-def drawState(screen, player):
+def drawState(screen, data):
     HEIGHT = screen.get_height()
     WIDTH = screen.get_width()
 
@@ -63,7 +67,11 @@ def drawState(screen, player):
             pygame.draw.rect(screen, pygame.Color( "gray"), squareOuter)
             pygame.draw.rect(screen, pygame.Color( "white"), squareInner)
 
-            if (r, c) in player.body:
+            if (r, c) in data.body:
+                center = ((right+c)*SQ_SIZE + padding - (SQ_SIZE/2), (bottom+r)*SQ_SIZE + padding - (SQ_SIZE/2))
+                pygame.draw.circle(screen, pygame.Color("black"), center, SQ_SIZE // 2.1)
+
+            if (r,c) == data.food:
                 center = ((right+c)*SQ_SIZE + padding - (SQ_SIZE/2), (bottom+r)*SQ_SIZE + padding - (SQ_SIZE/2))
                 pygame.draw.circle(screen, pygame.Color("green"), center, SQ_SIZE // 2.1)
 

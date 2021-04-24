@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 
 class Data:
 
@@ -32,7 +32,7 @@ class Data:
 
         elif inFrontCheck == "food":
             # Randomly sets food somewhere
-            self.food = (7,7)
+            self.food = self.addFood()
 
         else:
             self.body.pop( len(self.body) -1 )
@@ -54,6 +54,14 @@ class Data:
 
         else: 
             return "empty"
+
+    def addFood(self):
+        # Random point not in body
+        newFood = ( random.randint(-10, 11), random.randint(-7, 8) )
+        while( self.body.__contains__(newFood) ):
+            newFood = ( random.randint(-10, 11), random.randint(-7, 8) )
+            
+        return newFood
 
     def restart(self):
         self.direction = (0,-1)  

@@ -22,7 +22,7 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
         
-            elif event.type == pygame.KEYDOWN: # Arrow keys
+            elif event.type == pygame.KEYDOWN:
                 data.changeDirection(event.key)
 
         now = int(time.time()*10 % 60)
@@ -33,12 +33,6 @@ def main():
 
         drawState(screen, data)
         pygame.display.flip()
-
-def addFood():
-    # If there is no food
-    
-    return "hello"
-    #add food randomly somehwere 
 
 def drawState(screen, data):
     HEIGHT = screen.get_height()

@@ -14,7 +14,7 @@ def main():
     screen.fill("white")
     
     data = PlayerData.Data()
-    notNow = time.time()
+    notNow = int(time.time())
 
     while(True):
         
@@ -25,11 +25,11 @@ def main():
             elif event.type == pygame.KEYDOWN: # Arrow keys
                 data.changeDirection(event.key)
 
-        now = int(time.time() % 30)
+        now = int(time.time()*10 % 60)
         if now != notNow:
             data.updatePlayerLocation()
             
-            notNow = int(time.time() % 30)
+            notNow = int(time.time()*10 % 60)
 
         drawState(screen, data)
         pygame.display.flip()

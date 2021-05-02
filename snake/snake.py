@@ -11,10 +11,14 @@ def main():
 
     size = width, height
     screen = pygame.display.set_mode(size)
+    pygame.display.set_caption('Snake.py')
+    pygame.display.set_icon("Snake--icon.PNG")
+
     screen.fill("white")
     
     data = PlayerData.Data()
     notNow = int(time.time())
+    moved = False
 
     while(True):
         
@@ -22,12 +26,14 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
         
-            elif event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN and moved == False:
                 data.changeDirection(event.key)
+                moved = True 
 
         now = int(time.time()*10 % 60)
         if now != notNow:
             data.updatePlayerLocation()
+            moved = False
             
             notNow = int(time.time()*10 % 60)
 

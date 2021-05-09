@@ -29,13 +29,16 @@ class Data:
 
         if inFrontCheck == "self":
             self.restart()
+            return -1
 
         elif inFrontCheck == "food":
             # Randomly sets food somewhere
             self.food = self.addFood()
+            return 1
 
         else:
             self.body.pop( len(self.body) -1 )
+            return 0
     
     def checkInFront(self):
         squareInFront = (self.body[0][0] + self.direction[0] , self.body[0][1] + self.direction[1])

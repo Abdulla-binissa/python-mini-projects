@@ -6,13 +6,26 @@ SQ_SIZE = 20
 
 
 def main():
+    pygame.init()
     width = 320
     height = 440
+    score = 0
+    highscore = 0
 
     size = width, height
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption('Snake.py')
-    pygame.display.set_icon("Snake--icon.PNG")
+    font = pygame.font.Font('freesansbold.ttf', 20)
+ 
+    scoreStr = 'Score: ' + str(score)
+    scoreTxt = font.render(scoreStr, True, 'black')
+    scoreTextRect = scoreTxt.get_rect()
+    
+    highscoreStr = 'Highscore: ' + str(highscore)
+    highScoreTxt = font.render(highscoreStr, True, 'black')
+    highscoreTextRect = highScoreTxt.get_rect()
+    highscoreTextRect.right = width - 15
+    
 
     screen.fill("white")
     
@@ -32,12 +45,27 @@ def main():
 
         now = int(time.time()*10 % 60)
         if now != notNow:
-            data.updatePlayerLocation()
+            status = data.updatePlayerLocation()
+            if status == 1:
+                score += 1
+            elif status == -1:
+                score = 0
+            
+            if (highscore < score):
+                highscore = score
+
+            scoreStr = 'Score: ' + str(score)
+            scoreTxt = font.render(scoreStr, True, 'black')
+            highscoreStr = 'Highscore: ' + str(highscore)
+            highscoreTxt = font.render(highscoreStr, True, 'black')
+
             moved = False
             
             notNow = int(time.time()*10 % 60)
 
         drawState(screen, data)
+        screen.blit(scoreTxt, scoreTextRect)
+        screen.blit(highscoreTxt, highscoreTextRect)
         pygame.display.flip()
 
 def drawState(screen, data):
